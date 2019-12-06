@@ -1,11 +1,10 @@
+os: osx
 dist: trusty
-node_js: '9'
+node_js: '12'
 sudo: 'required'
 addons:
   chrome: 'stable'
 language: node_js
-before_install:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9876 http://localhost &
 install:
   - npm install
 script:
