@@ -1,6 +1,6 @@
 os: osx
 dist: trusty
-node_js: '12'
+node_js: '11'
 addons:
   chrome: 'stable'
 language: node_js
