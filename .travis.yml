@@ -1,7 +1,6 @@
-os: windows
+os: osx
 dist: trusty
 node_js: '12'
-sudo: 'required'
 addons:
   chrome: 'stable'
 language: node_js
