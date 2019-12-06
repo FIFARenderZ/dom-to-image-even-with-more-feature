@@ -3,35 +3,6 @@
   "version": "1.0.0",
   "description": "Generates an image from a DOM node using HTML5 canvas and SVG",
   "main": "src/dom-to-image-more.js",
-  "dependencies": {
-    "@babel/polyfill": "^7.7.0"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "babel-eslint": "^10.0.3",
-    "babel-plugin-add-module-exports": "^1.0.2",
-    "chai": "^4.2.0",
-    "eslint": "^6.7.2",
-    "eslint-config-adpyke-es6": "^1.4.13",
-    "eslint-config-prettier": "^6.7.0",
-    "grunt": "^1.0.4",
-    "grunt-cli": "^1.3.2",
-    "grunt-karma": "^3.0.2",
-    "js-yaml": "^3.13.1",
-    "karma": "^4.1.0",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-firefox-launcher": "^1.1.0",
-    "karma-mocha": "^1.3.0",
-    "karma-mocha-reporter": "^2.2.5",
-    "mocha": "^6.1.4",
-    "prettier": "^1.19.1",
-    "rimraf": "^3.0.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
-  },
   "scripts": {
     "test": "./node_modules/.bin/grunt test",
     "clean": "rimraf lib dist",
@@ -44,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/1904labs/dom-to-image-more.git"
+    "url": "git+https://github.com/kufii/dom-to-image-even-more.git"
   },
   "keywords": [
     "dom",
@@ -67,7 +38,38 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/1904labs/dom-to-image-more/issues"
+    "url": "https://github.com/kufii/dom-to-image-even-more/issues"
   },
-  "homepage": "https://github.com/1904labs/dom-to-image-more#readme"
+  "homepage": "https://github.com/kufii/dom-to-image-even-more#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.7.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.5",
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "babel-eslint": "^10.0.3",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "chai": "^4.2.0",
+    "eslint": "^6.7.2",
+    "eslint-config-adpyke-es6": "^1.4.13",
+    "eslint-config-prettier": "^6.7.0",
+    "grunt": "^1.0.4",
+    "grunt-cli": "^1.3.2",
+    "grunt-karma": "^3.0.2",
+    "js-yaml": "^3.13.1",
+    "karma": "^4.1.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "mocha": "^6.1.4",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
+    "tesseract.js": "^1.0.19",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
 }

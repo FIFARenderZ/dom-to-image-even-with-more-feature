@@ -1,12 +1,12 @@
 import domtoimage from '/base/src/dom-to-image-more.js';
 
-var assert = window.chai.assert;
-var imagediff = window.imagediff;
-var Promise = window.Promise;
+const assert = window.chai.assert;
+const imagediff = window.imagediff;
+const Promise = window.Promise;
 
-var delay = domtoimage.impl.util.delay;
+const delay = domtoimage.impl.util.delay;
 
-var BASE_URL = '/base/spec/resources/';
+const BASE_URL = '/base/spec/resources/';
 
 describe('domtoimage', function() {
   afterEach(purgePage);
@@ -16,6 +16,16 @@ describe('domtoimage', function() {
   });
 
   describe('regression', function() {
+    it('should load Tesseract', function(done) {
+      this.timeout(200000);
+      Tesseract.recognize(document.createElement('canvas'))
+        .then(() => {
+          assert(true);
+          done();
+        })
+        .catch(done);
+    });
+
     it('should render to svg', function(done) {
       loadTestPage('small/dom-node.html', 'small/style.css', 'small/control-image')
         .then(function() {
@@ -79,9 +89,9 @@ describe('domtoimage', function() {
     it('should render bigger node', function(done) {
       loadTestPage('bigger/dom-node.html', 'bigger/style.css', 'bigger/control-image')
         .then(function() {
-          var parent = $('#dom-node');
-          var child = $('.dom-child-node');
-          for (var i = 0; i < 10; i++) {
+          const parent = $('#dom-node');
+          const child = $('.dom-child-node');
+          for (let i = 0; i < 10; i++) {
             parent.append(child.clone());
           }
         })
@@ -97,12 +107,12 @@ describe('domtoimage', function() {
         .catch(done);
     });
 
-    // it('should render nested svg with broken namespace', function(done) {
-    //   loadTestPage('svg-ns/dom-node.html', 'svg-ns/style.css', 'svg-ns/control-image')
-    //     .then(renderAndCheck)
-    //     .then(done)
-    //     .catch(done);
-    // });
+    it('should render nested svg with broken namespace', function(done) {
+      loadTestPage('svg-ns/dom-node.html', 'svg-ns/style.css', 'svg-ns/control-image')
+        .then(renderAndCheck)
+        .then(done)
+        .catch(done);
+    });
 
     it('should render svg <rect> with width and height', function(done) {
       loadTestPage('svg-rect/dom-node.html', 'svg-rect/style.css', 'svg-rect/control-image')
@@ -112,7 +122,7 @@ describe('domtoimage', function() {
     });
 
     it('should render whole node when its scrolled', function(done) {
-      var domNode;
+      let domNode;
       loadTestPage('scroll/dom-node.html', 'scroll/style.css', 'scroll/control-image')
         .then(function() {
           domNode = $('#scrolled')[0];
@@ -130,7 +140,7 @@ describe('domtoimage', function() {
     });
 
     it('should render text nodes', function(done) {
-      this.timeout(20000);
+      this.timeout(10000);
       loadTestPage('text/dom-node.html', 'text/style.css')
         .then(renderToPng)
         .then(drawDataUrl)
@@ -145,11 +155,8 @@ describe('domtoimage', function() {
         .then(delay(1000))
         .then(renderToPng)
         .then(drawDataUrl)
-        .then(pass) // the canvas text check is iffy
-        /*
-                    .then(assertTextRendered(["JustBefore", "BothBefore"]))
-                    .then(assertTextRendered(["JustAfter", "BothAfterBefore"]))
-                    */
+        .then(assertTextRendered(['JUST BEFORE', 'BOTH BEFORE']))
+        .then(assertTextRendered(['JUST AFTER', 'BOTH AFTER']))
         .then(done)
         .catch(done);
     });
@@ -163,7 +170,7 @@ describe('domtoimage', function() {
       loadTestPage('filter/dom-node.html', 'filter/style.css', 'filter/control-image')
         .then(function() {
           return domtoimage.toPng(domNode(), {
-            filter: filter
+            filter
           });
         })
         .then(check)
@@ -180,7 +187,7 @@ describe('domtoimage', function() {
       loadTestPage('filter/dom-node.html', 'filter/style.css', 'filter/control-image')
         .then(function() {
           return domtoimage.toPng(domNode(), {
-            filter: filter
+            filter
           });
         })
         .then(check)
@@ -202,10 +209,7 @@ describe('domtoimage', function() {
         .then(delay(1000))
         .then(renderToPng)
         .then(drawDataUrl)
-        .then(pass) // the canvas text check is iffy
-        /*
-                    .then(assertTextRendered(['O']))
-                    */
+        .then(assertTextRendered(['+']))
         .then(done)
         .catch(done);
     });
@@ -257,8 +261,8 @@ describe('domtoimage', function() {
     it('should render content from <canvas>', function(done) {
       loadTestPage('canvas/dom-node.html', 'canvas/style.css')
         .then(function() {
-          var canvas = document.getElementById('content');
-          var ctx = canvas.getContext('2d');
+          const canvas = document.getElementById('content');
+          const ctx = canvas.getContext('2d');
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           ctx.fillStyle = '#000000';
@@ -275,9 +279,9 @@ describe('domtoimage', function() {
     it('should handle zero-width <canvas>', function(done) {
       loadTestPage('canvas/empty-data.html', 'canvas/empty-style.css')
         .then(function() {
-          var node = document.getElementById('dom-node');
+          const node = document.getElementById('dom-node');
           domtoimage.toSvg(node).then(function(dataUrl) {
-            var img = new Image();
+            const img = new Image();
             document.getElementById('result').appendChild(img);
             img.src = dataUrl;
           });
@@ -327,9 +331,9 @@ describe('domtoimage', function() {
           return domtoimage.toPixelData(domNode());
         })
         .then(function(pixels) {
-          for (var y = 0; y < domNode().scrollHeight; ++y) {
-            for (var x = 0; x < domNode().scrollWidth; ++x) {
-              var rgba = [0, 0, 0, 0];
+          for (let y = 0; y < domNode().scrollHeight; ++y) {
+            for (let x = 0; x < domNode().scrollWidth; ++x) {
+              const rgba = [0, 0, 0, 0];
 
               if (y < 10) {
                 rgba[0] = 255;
@@ -347,7 +351,7 @@ describe('domtoimage', function() {
                 rgba[3] = parseInt(0.2 * 255);
               }
 
-              var offset = 4 * y * domNode().scrollHeight + 4 * x;
+              const offset = 4 * y * domNode().scrollHeight + 4 * x;
               assert.deepEqual(
                 Uint8Array.from(pixels.slice(offset, offset + 4)),
                 Uint8Array.from(rgba)
@@ -437,23 +441,25 @@ describe('domtoimage', function() {
     function assertTextRendered(lines) {
       return function() {
         return new Promise(function(resolve, reject) {
-          Tesseract.recognize(canvas()).then(function(result) {
-            lines.forEach(function(line) {
-              try {
-                assert.include(result.text, line);
-              } catch (e) {
-                reject(e);
-              }
-            });
-            resolve();
-          });
+          Tesseract.recognize(canvas())
+            .then(function(result) {
+              lines.forEach(function(line) {
+                try {
+                  assert.include(result.text, line);
+                } catch (e) {
+                  reject(e);
+                }
+              });
+              resolve();
+            })
+            .catch(reject);
         });
       };
     }
 
     function makeImgElement(src) {
       return new Promise(function(resolve) {
-        var image = new Image();
+        const image = new Image();
         image.onload = function() {
           resolve(image);
         };
@@ -479,23 +485,23 @@ describe('domtoimage', function() {
   });
 
   describe('inliner', function() {
-    var NO_BASE_URL = null;
+    const NO_BASE_URL = null;
 
     it('should parse urls', function() {
-      var parse = domtoimage.impl.inliner.impl.readUrls;
+      const parse = domtoimage.impl.inliner.impl.readUrls;
 
       assert.deepEqual(parse('url("http://acme.com/file")'), ['http://acme.com/file']);
       assert.deepEqual(parse("url(foo.com), url('bar.org')"), ['foo.com', 'bar.org']);
     });
 
     it('should ignore data urls', function() {
-      var parse = domtoimage.impl.inliner.impl.readUrls;
+      const parse = domtoimage.impl.inliner.impl.readUrls;
 
       assert.deepEqual(parse('url(foo.com), url(data:AAA)'), ['foo.com']);
     });
 
     it('should inline url', function(done) {
-      var inline = domtoimage.impl.inliner.impl.inline;
+      const inline = domtoimage.impl.inliner.impl.inline;
 
       inline(
         'url(http://acme.com/image.png), url(foo.com)',
@@ -513,7 +519,7 @@ describe('domtoimage', function() {
     });
 
     it('should resolve urls if base url given', function(done) {
-      var inline = domtoimage.impl.inliner.impl.inline;
+      const inline = domtoimage.impl.inliner.impl.inline;
 
       inline('url(images/image.png)', 'images/image.png', 'http://acme.com/', function(url) {
         return Promise.resolve(
@@ -530,7 +536,7 @@ describe('domtoimage', function() {
     });
 
     it('should inline all urls', function(done) {
-      var inlineAll = domtoimage.impl.inliner.inlineAll;
+      const inlineAll = domtoimage.impl.inliner.inlineAll;
 
       inlineAll('url(http://acme.com/image.png), url("foo.com/font.ttf")', NO_BASE_URL, function(
         url
@@ -577,14 +583,14 @@ describe('domtoimage', function() {
     });
 
     it('should return placeholder result if cannot get resource and placeholder is provided', function(done) {
-      var placeholder =
+      const placeholder =
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY7h79y4ABTICmGnXPbMAAAAASUVORK5CYII=';
-      var original = domtoimage.impl.options.imagePlaceholder;
+      const original = domtoimage.impl.options.imagePlaceholder;
       domtoimage.impl.options.imagePlaceholder = placeholder;
       domtoimage.impl.util
         .getAndEncode(BASE_URL + 'util/not-found')
         .then(function(resource) {
-          var placeholderData = placeholder.split(/,/)[1];
+          const placeholderData = placeholder.split(/,/u)[1];
           assert.equal(resource, placeholderData);
           domtoimage.impl.options.imagePlaceholder = original;
         })
@@ -593,7 +599,7 @@ describe('domtoimage', function() {
     });
 
     it('should parse extension', function() {
-      var parse = domtoimage.impl.util.parseExtension;
+      const parse = domtoimage.impl.util.parseExtension;
 
       assert.equal(parse('http://acme.com/font.woff'), 'woff');
       assert.equal(parse('../FONT.TTF'), 'TTF');
@@ -602,7 +608,7 @@ describe('domtoimage', function() {
     });
 
     it('should guess mime type from url', function() {
-      var mime = domtoimage.impl.util.mimeType;
+      const mime = domtoimage.impl.util.mimeType;
 
       assert.equal(mime('http://acme.com/font.woff'), 'application/font-woff');
       assert.equal(mime('IMAGE.PNG'), 'image/png');
@@ -610,7 +616,7 @@ describe('domtoimage', function() {
     });
 
     it('should resolve url', function() {
-      var resolve = domtoimage.impl.util.resolveUrl;
+      const resolve = domtoimage.impl.util.resolveUrl;
 
       assert.equal(resolve('font.woff', 'http://acme.com'), 'http://acme.com/font.woff');
       assert.equal(
@@ -629,14 +635,14 @@ describe('domtoimage', function() {
     });
 
     it('should generate uids', function() {
-      var uid = domtoimage.impl.util.uid;
+      const uid = domtoimage.impl.util.uid;
       assert(uid().length >= 4);
       assert.notEqual(uid(), uid());
     });
   });
 
   describe('web fonts', function() {
-    var fontFaces = domtoimage.impl.fontFaces;
+    const fontFaces = domtoimage.impl.fontFaces;
 
     it('should read non-local font faces', function(done) {
       loadTestPage('fonts/web-fonts/empty.html', 'fonts/web-fonts/rules.css')
@@ -676,9 +682,9 @@ describe('domtoimage', function() {
 
   describe('images', function() {
     it('should not inline images with data url', function(done) {
-      var originalSrc = 'data:image/jpeg;base64,AAA';
+      const originalSrc = 'data:image/jpeg;base64,AAA';
 
-      var img = new Image();
+      const img = new Image();
       img.src = originalSrc;
 
       domtoimage.impl.images.impl
@@ -717,7 +723,7 @@ describe('domtoimage', function() {
 
   function loadPage() {
     return getResource('page.html').then(function(html) {
-      var root = document.createElement('div');
+      const root = document.createElement('div');
       root.id = 'test-root';
       root.innerHTML = html;
       document.body.appendChild(root);
@@ -725,7 +731,7 @@ describe('domtoimage', function() {
   }
 
   function purgePage() {
-    var root = $('#test-root');
+    const root = $('#test-root');
     if (root) root.remove();
   }
 
@@ -746,8 +752,8 @@ describe('domtoimage', function() {
   }
 
   function getResource(fileName) {
-    var url = BASE_URL + fileName;
-    var request = new XMLHttpRequest();
+    const url = BASE_URL + fileName;
+    const request = new XMLHttpRequest();
     request.open('GET', url, true);
     request.responseType = 'text';
 

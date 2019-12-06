@@ -12,19 +12,15 @@ module.exports = function(config) {
         included: false,
         served: true
       },
+      'node_modules/@fortawesome/fontawesome-free/css/all.min.css',
       {
-        pattern: 'bower_components/fontawesome/fonts/*.*',
-        included: false,
-        served: true
-      },
-      {
-        pattern: 'bower_components/fontawesome/css/*.*',
+        pattern: 'node_modules/@fortawesome/fontawesome-free/webfonts/*',
         included: false,
         served: true
       },
       'bower_components/jquery/dist/jquery.js',
       'bower_components/js-imagediff/imagediff.js',
-      'test-lib/tesseract-1.0.10.js',
+      'node_modules/tesseract.js/dist/tesseract.min.js',
       {
         pattern: 'src/dom-to-image-more.js',
         type: 'module'

@@ -725,12 +725,10 @@ function newFontFaces() {
     function getCssRules(styleSheets) {
       const cssRules = [];
       styleSheets.forEach(function(sheet) {
-        if (Object.prototype.hasOwnProperty.call(sheet, 'cssRules')) {
-          try {
-            util.asArray(sheet.cssRules || []).forEach(cssRules.push.bind(cssRules));
-          } catch (e) {
-            console.log('Error while reading CSS rules from ' + sheet.href, e.toString());
-          }
+        try {
+          util.asArray(sheet.cssRules || []).forEach(cssRules.push.bind(cssRules));
+        } catch (e) {
+          console.log('Error while reading CSS rules from ' + sheet.href, e.toString());
         }
       });
       return cssRules;
