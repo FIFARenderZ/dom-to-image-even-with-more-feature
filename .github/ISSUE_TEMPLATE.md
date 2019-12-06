@@ -1,4 +1,4 @@
-### Use case: description, code  
+### Use case: description, code
 
 [jsfiddle](https://jsfiddle.net/IDisposable/emjL1ow8/)
 
@@ -10,5 +10,5 @@
 
 ### Browsers
 
-- [ ] Chrome 49+  
-- [ ] Firefox 45+  
+- [ ] Chrome 49+
+- [ ] Firefox 45+
