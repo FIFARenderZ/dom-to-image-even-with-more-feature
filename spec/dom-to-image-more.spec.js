@@ -214,16 +214,16 @@ describe('domtoimage', function() {
         .catch(done);
     });
 
-    // it('should render images', function(done) {
-    //   this.timeout(10000);
-    //   loadTestPage('images/dom-node.html', 'images/style.css')
-    //     .then(delay(500))
-    //     .then(renderToPng)
-    //     .then(drawDataUrl)
-    //     .then(assertTextRendered(['PNG', 'JPG']))
-    //     .then(done)
-    //     .catch(done);
-    // });
+    it('should render images', function(done) {
+      this.timeout(10000);
+      loadTestPage('images/dom-node.html', 'images/style.css')
+        .then(delay(500))
+        .then(renderToPng)
+        .then(drawDataUrl)
+        .then(assertTextRendered(['PNG', 'JPG']))
+        .then(done)
+        .catch(done);
+    });
 
     it('should render background images', function(done) {
       loadTestPage('css-bg/dom-node.html', 'css-bg/style.css')
@@ -560,17 +560,17 @@ describe('domtoimage', function() {
   });
 
   describe('util', function() {
-    // it('should get and encode resource', function(done) {
-    //   var getAndEncode = domtoimage.impl.util.getAndEncode;
-    //   getResource('util/fontawesome.base64')
-    //     .then(function(testResource) {
-    //       return getAndEncode(BASE_URL + 'util/fontawesome.woff2').then(function(resource) {
-    //         assert.equal(resource, testResource);
-    //       });
-    //     })
-    //     .then(done)
-    //     .catch(done);
-    // });
+    it('should get and encode resource', function(done) {
+      const getAndEncode = domtoimage.impl.util.getAndEncode;
+      getResource('util/fontawesome.base64')
+        .then(function(testResource) {
+          return getAndEncode(BASE_URL + 'util/fontawesome.woff2').then(function(resource) {
+            assert.equal(resource, testResource);
+          });
+        })
+        .then(done)
+        .catch(done);
+    });
 
     it('should return empty result if cannot get resource', function(done) {
       domtoimage.impl.util
@@ -649,35 +649,38 @@ describe('domtoimage', function() {
         .then(function() {
           return fontFaces.impl.readAll();
         })
-        /*
-                    .then(function(webFonts) {
-                        assert.equal(webFonts.length, 3);
 
-                        var sources = webFonts.map(function(webFont) {
-                            return webFont.src();
-                        });
-                        assertSomeIncludesAll(sources, ['http://fonts.com/font1.woff', 'http://fonts.com/font1.woff2']);
-                        assertSomeIncludesAll(sources, ['http://fonts.com/font2.ttf?v1.1.3']);
-                        assertSomeIncludesAll(sources, ['data:font/woff2;base64,AAA']);
-                    })
-                    */
-        .then(pass)
+        .then(function(webFonts) {
+          assert.equal(webFonts.length, 9);
+
+          const sources = webFonts.map(function(webFont) {
+            return webFont.src();
+          });
+          assertSomeIncludesAll(sources, [
+            'http://fonts.com/font1.woff',
+            'http://fonts.com/font1.woff2'
+          ]);
+          assertSomeIncludesAll(sources, ['http://fonts.com/font2.ttf?v1.1.3']);
+          assertSomeIncludesAll(sources, ['data:font/woff2;base64,AAA']);
+        })
         .then(done)
         .catch(done);
     });
 
-    /*
-            function assertSomeIncludesAll(haystacks, needles) {
-                assert(
-                    haystacks.some(function(haystack) {
-                        return needles.every(function(needle) {
-                            return (haystack.indexOf(needle) !== -1);
-                        });
-                    }),
-                    '\nnone of\n[ ' + haystacks.join('\n') + ' ]\nincludes all of \n[ ' + needles.join(', ') + ' ]'
-                );
-            }
-            */
+    function assertSomeIncludesAll(haystacks, needles) {
+      assert(
+        haystacks.some(function(haystack) {
+          return needles.every(function(needle) {
+            return haystack.indexOf(needle) !== -1;
+          });
+        }),
+        '\nnone of\n[ ' +
+          haystacks.join('\n') +
+          ' ]\nincludes all of \n[ ' +
+          needles.join(', ') +
+          ' ]'
+      );
+    }
   });
 
   describe('images', function() {
@@ -745,10 +748,6 @@ describe('domtoimage', function() {
 
   function canvas() {
     return $('#canvas')[0];
-  }
-
-  function pass(resource) {
-    assert.isTrue(typeof resource !== 'undefined');
   }
 
   function getResource(fileName) {
