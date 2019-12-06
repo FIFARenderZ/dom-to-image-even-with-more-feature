@@ -41,7 +41,7 @@ module.exports = function(config) {
       captureConsole: true
     },
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['chrome'],
     customLaunchers: {
       chrome: {
         base: 'Chrome',
@@ -50,6 +50,6 @@ module.exports = function(config) {
     },
 
     singleRun: false,
-    browserNoActivityTimeout: 60000
+    browserNoActivityTimeout: 100000
   });
 };
