@@ -1,4 +1,4 @@
-os: osx
+os: windows
 dist: trusty
 node_js: '12'
 sudo: 'required'
