@@ -52,6 +52,7 @@ function toSvg(node, options) {
     .then(function(node) {
       return cloneNode(node, options.filter, true);
     })
+    .then(node => (options.postProcess && options.postProcess(node), node))
     .then(embedFonts)
     .then(inlineImages)
     .then(applyOptions)

@@ -3,6 +3,7 @@
 module.exports = {
   output: {
     library: 'domtoimage',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    libraryExport: 'default'
   }
 };
