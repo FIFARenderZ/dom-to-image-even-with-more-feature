@@ -7,7 +7,7 @@
 **dom-to-image-even-more** is a library which can turn arbitrary DOM node into
 a vector (SVG) or raster (PNG or JPEG) image, written in JavaScript.
 
-This fork of [dom-to-image-more](https://github.com/1904labs/dom-to-image-more) which is in turn a fork of [dom-to-image by Anatolii Saienko (tsayen)](https://github.com/tsayen/dom-to-image)
+This is a fork of [dom-to-image-more](https://github.com/1904labs/dom-to-image-more) which is in turn a fork of [dom-to-image by Anatolii Saienko (tsayen)](https://github.com/tsayen/dom-to-image)
 with some important fixes merged. We are eternally grateful for his starting point.
 
 Anatolii's version was based on [domvas by Paul Bakaus](https://github.com/pbakaus/domvas)
