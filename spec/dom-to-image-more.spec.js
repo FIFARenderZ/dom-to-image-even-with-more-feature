@@ -235,6 +235,7 @@ describe('domtoimage', function() {
     });
 
     it('should render user input from <textarea>', function(done) {
+      this.timeout(10000);
       loadTestPage('textarea/dom-node.html', 'textarea/style.css')
         .then(function() {
           document.getElementById('input').value = 'USER\nINPUT';
@@ -247,6 +248,7 @@ describe('domtoimage', function() {
     });
 
     it('should render user input from <input>', function(done) {
+      this.timeout(10000);
       loadTestPage('input/dom-node.html', 'input/style.css')
         .then(function() {
           document.getElementById('input').value = 'USER INPUT';
