@@ -1,6 +1,6 @@
 # DOM to Image
 
-[![Build Status](https://api.travis-ci.org/kufii/dom-to-image-even-more.svg?branch=master)](https://travis-ci.org/1904labs/dom-to-image-more)
+[![Build Status](https://api.travis-ci.org/kufii/dom-to-image-even-more.svg?branch=master)](https://travis-ci.org/kufii/dom-to-image-even-more)
 
 ## What is it
 
