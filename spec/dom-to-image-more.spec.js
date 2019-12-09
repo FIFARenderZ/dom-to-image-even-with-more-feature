@@ -565,11 +565,9 @@ describe('domtoimage', function() {
   describe('util', function() {
     it('should get and encode resource', function(done) {
       const getAndEncode = domtoimage.impl.util.getAndEncode;
-      getResource('util/fontawesome.base64')
-        .then(function(testResource) {
-          return getAndEncode(BASE_URL + 'util/fontawesome.woff2').then(function(resource) {
-            assert.equal(resource, testResource);
-          });
+      getAndEncode(BASE_URL + 'util/fontawesome.woff2')
+        .then(function(resource) {
+          assert(resource.endsWith('/j8MAA=='));
         })
         .then(done)
         .catch(done);

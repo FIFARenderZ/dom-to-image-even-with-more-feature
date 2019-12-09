@@ -50,6 +50,6 @@ module.exports = function(config) {
     },
 
     singleRun: false,
-    browserNoActivityTimeout: 100000
+    browserNoActivityTimeout: 200000
   });
 };
