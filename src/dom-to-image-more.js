@@ -43,6 +43,7 @@ const domtoimage = {
      * @param {Number} options.scale - a Number multiplier to scale up the canvas before rendering to reduce fuzzy images, defaults to 1.0.
      * @param {String} options.imagePlaceholder - dataURL to use as a placeholder for failed images, default behaviour is to fail fast on images we can't fetch
      * @param {Boolean} options.cacheBust - set to true to cache bust by appending the time to the request url
+     * @param {String} options.corsProxyUrl - set to cors proxy url with url need to bypass as parameter in the end (ex: https://your-cors-bypass/<url>)
      * @return {Promise} - A promise that is fulfilled with a SVG image data URL
      * */
 function toSvg(node, options) {
@@ -148,6 +149,12 @@ function copyOptions(options) {
     domtoimage.impl.options.useCredentials = defaultOptions.useCredentials;
   } else {
     domtoimage.impl.options.useCredentials = options.useCredentials;
+  }
+
+  if (typeof options.corsProxyUrl === 'string') {
+    domtoimage.impl.options.corsProxyUrl = options.corsProxyUrl;
+  } else {
+    domtoimage.impl.options.corsProxyUrl = null;
   }
 }
 
@@ -522,7 +529,11 @@ function newUtil() {
       if (domtoimage.impl.options.useCredentials) {
         request.withCredentials = true;
       }
-      request.open('GET', url, true);
+      let parsedUrl = url;
+      if (domtoimage.impl.options.corsProxyUrl) {
+        parsedUrl = domtoimage.impl.options.corsProxyUrl + url;
+      }
+      request.open('GET', parsedUrl, true);
       request.send();
 
       let placeholder;

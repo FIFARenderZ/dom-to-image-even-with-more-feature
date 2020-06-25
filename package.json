@@ -1,6 +1,6 @@
 {
-  "name": "dom-to-image-even-more",
-  "version": "1.0.4",
+  "name": "@paolaid/dom-to-image-even-with-more-feature",
+  "version": "1.1.0",
   "description": "Generates an image from a DOM node using HTML5 canvas and SVG",
   "main": "src/dom-to-image-more.js",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kufii/dom-to-image-even-more.git"
+    "url": "git+https://github.com/paolaid/dom-to-image-even-with-more-feature"
   },
   "keywords": [
     "dom",
@@ -34,13 +34,14 @@
     "Daniel Fischer <daniel.fischer@iqdoq.de>",
     "Aidas Klimas",
     "Edgardo Di Gesto",
-    "樊冬 Fan Dong <CG-man@outlook.com>"
+    "樊冬 Fan Dong <CG-man@outlook.com>",
+    "Bayu Prasetyo <contact@bayukresno.id>"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kufii/dom-to-image-even-more/issues"
+    "url": "https://github.com/paolaid/dom-to-image-even-with-more-feature/issues"
   },
-  "homepage": "https://github.com/kufii/dom-to-image-even-more#readme",
+  "homepage": "https://github.com/paolaid/dom-to-image-even-with-more-feature#readme",
   "dependencies": {
     "@babel/polyfill": "^7.7.0"
   },

@@ -131,6 +131,11 @@ for unit testing._
 
 ### Rendering options
 
+### corsProxyUrl
+
+An url string that will bypass cors. URL need to accept url value in the end
+(ex: https://bypass.me will be use as https://bypass.me/<url>])
+
 #### filter
 
 A function taking DOM node as argument. Should return true if passed node
